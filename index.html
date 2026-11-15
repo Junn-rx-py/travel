@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>智慧旅遊規劃 App</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Smart Travel Planner - 智慧旅遊規劃</title>
+    <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome 圖標庫 -->
+    <!-- 引入 FontAwesome 圖示庫 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
 
-    <!-- 頂部導航列 (包含 6 個 Tabs 與手機端橫向捲動) -->
-    <header class="bg-indigo-600 text-white shadow-md sticky top-0 z-50">
+    <!-- 頂部導航列 (支援桌面端與手機端橫向滑動) -->
+    <header class="bg-indigo-600 text-white shadow-md sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-3">
-            <h1 class="text-xl font-bold flex items-center">
+            <h1 class="text-xl font-bold flex items-center tracking-wide">
                 <i class="fa-solid fa-plane-departure mr-2"></i>Smart Travel Planner
             </h1>
-            <nav class="flex space-x-1 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 no-scrollbar">
-                <button onclick="switchTab('login')" id="btn-login" class="px-3 py-1.5 rounded-lg hover:bg-indigo-500 text-sm font-medium whitespace-nowrap transition">🔐 登入</button>
-                <button onclick="switchTab('map')" id="btn-map" class="px-3 py-1.5 rounded-lg hover:bg-indigo-500 text-sm font-medium whitespace-nowrap transition">🗺️ 地圖口袋</button>
-                <button onclick="switchTab('itinerary')" id="btn-itinerary" class="px-3 py-1.5 rounded-lg bg-indigo-700 text-sm font-medium whitespace-nowrap transition shadow-sm">📅 主行程</button>
-                <button onclick="switchTab('skipped')" id="btn-skipped" class="px-3 py-1.5 rounded-lg hover:bg-indigo-500 text-sm font-medium whitespace-nowrap transition">⚠️ 已跳過</button>
-                <button onclick="switchTab('links')" id="btn-links" class="px-3 py-1.5 rounded-lg hover:bg-indigo-500 text-sm font-medium whitespace-nowrap transition">🔗 便利連結</button>
-                <button onclick="switchTab('documents')" id="btn-documents" class="px-3 py-1.5 rounded-lg hover:bg-indigo-500 text-sm font-medium whitespace-nowrap transition">📁 文件中心</button>
+            <nav class="flex space-x-1 overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
+                <button onclick="if(window.switchTab) switchTab('login')" id="btn-login" class="px-3 py-1.5 rounded-lg bg-indigo-700 text-sm font-medium whitespace-nowrap transition shadow-sm">🔐 登入</button>
+                <button onclick="if(window.switchTab) switchTab('map')" id="btn-map" class="px-3 py-1.5 rounded-lg hover:bg-indigo-500 text-sm font-medium whitespace-nowrap transition">🗺️ 地圖口袋</button>
+                <button onclick="if(window.switchTab) switchTab('itinerary')" id="btn-itinerary" class="px-3 py-1.5 rounded-lg hover:bg-indigo-500 text-sm font-medium whitespace-nowrap transition">📅 主行程</button>
+                <button onclick="if(window.switchTab) switchTab('skipped')" id="btn-skipped" class="px-3 py-1.5 rounded-lg hover:bg-indigo-500 text-sm font-medium whitespace-nowrap transition">⚠️ 已跳過</button>
+                <button onclick="if(window.switchTab) switchTab('links')" id="btn-links" class="px-3 py-1.5 rounded-lg hover:bg-indigo-500 text-sm font-medium whitespace-nowrap transition">🔗 便利連結</button>
+                <button onclick="if(window.switchTab) switchTab('documents')" id="btn-documents" class="px-3 py-1.5 rounded-lg hover:bg-indigo-500 text-sm font-medium whitespace-nowrap transition">📁 文件中心</button>
             </nav>
         </div>
     </header>
@@ -31,15 +31,15 @@
     <!-- 主要內容動態掛載區 -->
     <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6">
         <div id="app-container">
-            <!-- 載入中的過場提示，等 dyna.js 取得 GAS 資料後會自動替換 -->
-            <div class="text-center py-20 text-slate-400">
-                <i class="fa-solid fa-spinner fa-spin text-3xl mb-3 text-indigo-600"></i>
-                <p class="text-sm font-medium">正在從雲端安全載入介面模組與資料...</p>
+            <div class="text-center py-24 text-slate-400">
+                <i class="fa-solid fa-circle-notch fa-spin text-4xl mb-4 text-indigo-600"></i>
+                <p class="text-sm font-medium text-slate-600">正在從雲端安全載入介面模組與資料...</p>
+                <p id="loading-status-text" class="text-xs text-slate-400 mt-1">準備連線至後端伺服器</p>
             </div>
         </div>
     </main>
 
-    <!-- 載入前端固定設定檔與動態載入引擎 -->
+    <!-- 嚴格依序同步載入：先載入設定檔，再執行動態載入引擎（不可加 async 或 defer） -->
     <script src="config.js"></script>
     <script src="dyna.js"></script>
 </body>
