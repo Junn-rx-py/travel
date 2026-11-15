@@ -4,7 +4,7 @@
  */
 window.APP_CONFIG = {
     // 請將以下字串替換為你在 Google Apps Script 部署 Web App 後取得的網址
-    GAS_WEB_APP_URL: "https://script.google.com/macros/s/AKfycbx9-HNxSOA0OgYMTNRiG6pyBIRhQ1XAx-HDKCAXoegj_IID9aQkyjGLlNISHhJchcHsZQ/exec",
+    GAS_URL: "https://script.google.com/macros/s/AKfycbx9-HNxSOA0OgYMTNRiG6pyBIRhQ1XAx-HDKCAXoegj_IID9aQkyjGLlNISHhJchcHsZQ/exec",
     
     // 應用程式版本標識
     VERSION: "1.0.0",
